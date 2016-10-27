@@ -1,21 +1,22 @@
 'use strict';
 
-var gulp = require('gulp');
-var path = require('path');
-var util = require('util');
-var gutil = require('gulp-util');
-var merge = require('merge-stream');
-var rename = require('gulp-rename');
-var pkg = require('./package.json');
-var chalk = require('chalk');
-var runSequence = require('run-sequence');
-var clean = require('gulp-clean');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat-util');
-var sourcemaps = require('gulp-sourcemaps');
-var karma = require('karma');
-var gulpDocs = require('gulp-ngdocs');
-var less = require('gulp-less');
+const gulp = require('gulp');
+const path = require('path');
+const util = require('util');
+const gutil = require('gulp-util');
+const merge = require("merge-stream");
+const rename = require('gulp-rename');
+const pkg = require('./package.json');
+const chalk = require('chalk');
+const runSequence = require('run-sequence');
+const clean = require('gulp-clean');
+const uglify = require('gulp-uglify');
+const concat = require('gulp-concat-util');
+const sourcemaps = require('gulp-sourcemaps');
+const karma = require('karma');
+const gulpDocs = require('gulp-ngdocs');
+const less = require('gulp-less');
+const jshint = require('gulp-jshint');
 
 /** CONFIG  **/
 
@@ -156,6 +157,12 @@ gulp.task('watch', function () {
         ['src/**/*.js', 'gulpfile.js'],
         ['default']
     );
+});
+
+gulp.task('lint', function() {
+  return gulp.src('src/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 /** DEFAULT **/
