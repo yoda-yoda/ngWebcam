@@ -1,0 +1,26 @@
+machine:
+  node:
+    version: 6.1.0
+
+dependencies:
+    pre:
+        - sudo ln -sf /usr/share/zoneinfo/Africa/Nairobi /etc/localtime
+
+test:
+  override:
+    - grunt test:
+        environment:
+            PATH: "$(npm bin):$PATH"
+
+deployment:
+    production:
+        branch: master
+        commands:
+            - grunt default:
+                environment:
+                    PATH: "$(npm bin):$PATH"
+            - npm publish
+
+general:
+    artifacts:
+        - coverage
