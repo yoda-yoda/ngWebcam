@@ -4,7 +4,7 @@ const gulp = require('gulp');
 const path = require('path');
 const util = require('util');
 const gutil = require('gulp-util');
-const merge = require("merge-stream");
+const merge = require('merge-stream');
 const rename = require('gulp-rename');
 const pkg = require('./package.json');
 const chalk = require('chalk');
@@ -17,6 +17,7 @@ const karma = require('karma');
 const gulpDocs = require('gulp-ngdocs');
 const less = require('gulp-less');
 const jshint = require('gulp-jshint');
+const stylish = require('jshint-stylish');
 
 /** CONFIG  **/
 
@@ -161,8 +162,9 @@ gulp.task('watch', function () {
 
 gulp.task('lint', function() {
   return gulp.src('src/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+  .pipe(jshint())
+  .pipe(jshint.reporter(stylish))
+  .pipe(jshint.reporter('fail'));
 });
 
 /** DEFAULT **/
@@ -171,6 +173,7 @@ gulp.task('default', function(){
 });
 
 gulp.task('test', function() {
+    gulp.start('lint');
     runSequence('clean:test', ['karma:unit', 'dist']);
 });
 
