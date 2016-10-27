@@ -5,10 +5,17 @@ machine:
 dependencies:
     pre:
         - sudo ln -sf /usr/share/zoneinfo/Africa/Nairobi /etc/localtime
+    override:
+        - npm install
 
 test:
   override:
-    - grunt test:
+    - gulp test:
+        environment:
+            PATH: "$(npm bin):$PATH"
+  post:
+    - bash <(curl -s https://codecov.io/bash)
+    - gulp:  # run gulp
         environment:
             PATH: "$(npm bin):$PATH"
 
@@ -16,7 +23,7 @@ deployment:
     production:
         branch: master
         commands:
-            - grunt default:
+            - gulp:
                 environment:
                     PATH: "$(npm bin):$PATH"
             - npm publish
