@@ -1,0 +1,7 @@
+examples/index.css
+docs
+dist/
+.DS_Store
+*.log
+node_modules/
+tests/coverage/

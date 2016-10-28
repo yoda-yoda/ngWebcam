@@ -1,0 +1,33 @@
+machine:
+  node:
+    version: 6.1.0
+
+dependencies:
+    pre:
+        - sudo ln -sf /usr/share/zoneinfo/Africa/Nairobi /etc/localtime
+    override:
+        - npm install
+
+test:
+  override:
+    - gulp test:
+        environment:
+            PATH: "$(npm bin):$PATH"
+  post:
+    - bash <(curl -s https://codecov.io/bash)
+    - gulp:  # run gulp
+        environment:
+            PATH: "$(npm bin):$PATH"
+
+deployment:
+    production:
+        branch: master
+        commands:
+            - gulp:
+                environment:
+                    PATH: "$(npm bin):$PATH"
+            - npm publish
+
+general:
+    artifacts:
+        - coverage
