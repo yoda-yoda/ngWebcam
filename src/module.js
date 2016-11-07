@@ -10,7 +10,7 @@
      * Parent module to wrap all `ngWebcam.*` modules
      *
      */
-    const deps = [];
+    const deps = ['ngWebcam.webcam'];
     angular.module('ngWebcam', deps);
 
 })(window.angular);

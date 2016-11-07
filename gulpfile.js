@@ -18,6 +18,7 @@ const gulpDocs = require('gulp-ngdocs');
 const less = require('gulp-less');
 const jshint = require('gulp-jshint');
 const stylish = require('jshint-stylish');
+const connect = require('gulp-connect');
 
 /** CONFIG  **/
 
@@ -47,6 +48,14 @@ gulp.task('clean:tmp', function() {
 // clean tests tmp folder
 gulp.task('clean:test', function() {
     return gulp.src(['tests/.tmp/*', 'tests/coverage/*'], {read: false}).pipe(clean());
+});
+
+gulp.task('connect', function() {
+    connect.server({
+        name: 'Dev App',
+        port: 8080,
+        livereload: true
+  });
 });
 
 // clean dist folder
@@ -161,7 +170,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('lint', function() {
-  return gulp.src('src/**/*.js')
+  return gulp.src('src/**/*.js', 'examples/**/*.js')
   .pipe(jshint())
   .pipe(jshint.reporter(stylish))
   .pipe(jshint.reporter('fail'));

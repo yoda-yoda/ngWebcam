@@ -1,18 +1,14 @@
 <html>
     <head>
         <link rel="stylesheet" href="">
+        <title>Angular Webcam</title>
     </head>
 
     <body ng-app='ngWebcamExample'>
-
-        <!-- Angular Webcam Component -->
-        <angular-webcam
-            on-error="$ctrl.onError(err)"
-            on-stream="$ctrl.onSstream(stream)">
-        </angular-webcam>
+        <webcam-example></webcam-example>
     </body>
 
-    <script src='../node_modules/angular.js'></script>
+    <script src='../node_modules/angular/angular.js'></script>
     <script src='../node_modules/angular-ui-router/release/angular-ui-router.js'></script>
     <script src='../dist/ngWebcam.js'></script>
     <script src='main.js'></script>

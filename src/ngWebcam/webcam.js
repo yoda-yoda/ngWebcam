@@ -83,12 +83,10 @@
         function _successCallback(stream) {
             if(isFunction(self.onStream)) {
                 const videoID = 'angular-webcam-stream';
-                localStream = stream;
                 const video = document.getElementById(videoID);
                 video.src = window.URL.createObjectURL(stream);
-
                 // Give the user access to the stream
-                return self.onStream(localStream);
+                return self.onStream(stream);
             }
             const msg = 'Please make sure the "onStream" binding is a function';
             return _throwIfError(msg);
